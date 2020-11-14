@@ -8,9 +8,9 @@ public class PivotRotation : MonoBehaviour
     void Start()
     {
         botao=Resources.Load("button") as GameObject;
-        Vector3 rotation=new Vector3(0,0,6);
-        for(int i=0;i<65;i++){
-            Instantiate(botao,new Vector3(0,4,0),Quaternion.identity, transform);
+        Vector3 rotation=new Vector3(0,0,0.5f);
+        for(int i=0;i<720;i++){
+            Instantiate(botao,new Vector3(0,2,0),Quaternion.identity, transform);
             transform.Rotate(rotation,Space.Self);            
         }
     }
