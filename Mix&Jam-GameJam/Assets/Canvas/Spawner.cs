@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
         }
     }
     
-    void SpawnGate()
+    public void SpawnGate()
     {
         float interpolant=Random.Range(0.0f,1.0f);
         int type=Random.Range(0,2);//0=low, 1=high

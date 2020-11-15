@@ -18,6 +18,11 @@ TagManager:
   - obstacleBot
   - obstacleMid
   - obstacleTop
+  - damagePanel
+  - gate
+  - speedManager
+  - jumpTutorial
+  - crouchTutorial
   layers:
   - Default
   - TransparentFX
