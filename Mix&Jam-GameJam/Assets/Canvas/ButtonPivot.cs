@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class ButtonPivot : MonoBehaviour
 {
-    public float rotSpeed=1;
+    public float rotSpeed;
+  
     void Update()
     {
+        rotSpeed=SpeedControl.speed;
         Vector3 rotation=new Vector3(0,0,rotSpeed*Time.deltaTime);
         transform.Rotate(rotation,Space.Self);
     }
