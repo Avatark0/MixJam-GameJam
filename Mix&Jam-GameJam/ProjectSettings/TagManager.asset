@@ -8,6 +8,16 @@ TagManager:
   - treadmill
   - player
   - roof
+  - spawner
+  - spawnerBotLow
+  - spawnerBotHigh
+  - spawnerTopLow
+  - spawnerTopHigh
+  - pivot
+  - wallLeft
+  - obstacleBot
+  - obstacleMid
+  - obstacleTop
   layers:
   - Default
   - TransparentFX
