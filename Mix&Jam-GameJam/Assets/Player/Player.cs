@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Animator anim;
-    public float speed=0;
+    public float speed=1;
 
     private Rigidbody rb;
 
-    public float jumpStrenght=3.4f;
+    public float jumpStrenght;
     private float jumpLenght=0.13f;//0.26 seconds total duration
     private float timer;
 
@@ -26,39 +26,42 @@ public class Player : MonoBehaviour
             timer=Time.time;
             anim.SetBool("isJumping",true);
             rb.velocity = new Vector3(0,jumpStrenght,0);
-            Debug.Log("Jump!");
-        }
-        if(Input.GetKeyDown(KeyCode.E)){
-            jumpStrenght-=0.2f;
-            anim.SetBool("isSliding",true);
-            Debug.Log("Slide!");
-        }
-        if(Input.GetKeyDown(KeyCode.D)){
-            speed+=0.2f;
-        }
-        if(Input.GetKeyDown(KeyCode.A)){
-            speed-=0.2f;
-        }
-        if(Input.GetKeyDown(KeyCode.W)){
-            jumpStrenght+=0.2f;
         }
         if(Input.GetKeyDown(KeyCode.S)){
-            jumpStrenght-=0.2f;
+            if(!anim.GetBool("isCrouching"))
+                 anim.SetBool("isCrouching",true);
+            else anim.SetBool("isCrouching",false);
         }
-        anim.SetFloat("speed",speed);
-    }
 
-    void FixedUpdate(){
-        if(timer>Time.time-jumpLenght){
-            Debug.Log("Subindo");
+        if(Input.GetKey(KeyCode.D)){
+            speed+=0.1f*Time.deltaTime;
         }
+        if(Input.GetKey(KeyCode.A)){
+            speed-=0.1f*Time.deltaTime;
+        }
+
+        if(speed<1)speed=1;
+        if(speed>4)speed=4;
+
+        anim.SetFloat("speed",speed);
+        anim.SetFloat("crouchSpeed",0.6f+(0.2f*speed));
+        jumpStrenght=3+speed-1;
     }
-    //verticalInput * movementSpeed * Time.deltaTime
 
     void OnCollisionEnter(Collision col){
         Debug.Log("Player colidiu com "+col.gameObject.tag);
         if(col.gameObject.tag=="treadmill" && timer < Time.time-jumpLenght){
             anim.SetBool("isJumping",false);
+        }
+    }
+
+    void OnTriggerEnter(Collider col){
+        Debug.Log("Player colidiu com "+col.gameObject.tag);
+        if(col.gameObject.tag=="obstacleBot"){
+            Debug.Log("hit bot");
+        }
+        if(col.gameObject.tag=="obstacleTop"){
+            Debug.Log("hit top");
         }
     }
 }
